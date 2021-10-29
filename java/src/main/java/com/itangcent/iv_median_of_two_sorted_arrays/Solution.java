@@ -1,4 +1,4 @@
-package medianOfTwoSortedArrays;
+package com.itangcent.iv_median_of_two_sorted_arrays;
 
 import java.util.Iterator;
 

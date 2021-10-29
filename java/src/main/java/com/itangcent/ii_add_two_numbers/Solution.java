@@ -1,4 +1,4 @@
-package addTwoNumbers;
+package com.itangcent.ii_add_two_numbers;
 
 /**
  * https://leetcode.com/problems/add-two-numbers/
@@ -35,7 +35,7 @@ public class Solution {
         ListNode rest = l1 == null ? l2 : l1;
         if (rest != null) {
             if (carry) {
-                for (; rest != null; ) {
+                while (rest != null) {
                     if (rest.val == 9) {
                         result.next = new ListNode(0);
                         result = result.next;

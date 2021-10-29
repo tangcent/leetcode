@@ -1,4 +1,4 @@
-package towSum;
+package com.itangcent.i_tow_sum;
 
 import java.util.Arrays;
 import java.util.HashMap;
