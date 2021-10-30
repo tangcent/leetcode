@@ -70,7 +70,8 @@ public class SolutionII {
         index1 = max(0, index1 - 2);
         index2 = max(0, index2 - 2);
         index = index1 + index2 - 1;
-        RandomIterator iterator = new TwoArrayIterator(new PeekableArrayIterator(nums1, index1), new PeekableArrayIterator(nums2, index2));
+        RandomIterator iterator = new TwoArrayIterator(new PeekableArrayIterator(nums1, index1),
+                new PeekableArrayIterator(nums2, index2));
 
         while (index < midIndex) {
             if (iterator.randomAble()) {
@@ -161,7 +162,7 @@ public class SolutionII {
         Integer next(int length);
     }
 
-    private class ArrayIterator implements RandomIterator {
+    private static class ArrayIterator implements RandomIterator {
 
         int[] nums;
 
@@ -196,8 +197,8 @@ public class SolutionII {
         }
 
         public Integer next(int length) {
-            index += length - 1;
-            return nums[index++];
+            index += length;
+            return nums[index - 1];
         }
     }
 
@@ -221,21 +222,13 @@ public class SolutionII {
         @Override
         public Integer next() {
             if (peek != null) {
-                Integer returnVal = peek;
-                peek = null;
-                return returnVal;
+                try {
+                    return peek;
+                } finally {
+                    peek = null;
+                }
             }
             return super.next();
-        }
-
-
-        @Override
-        public Integer next(int length) {
-            if (peek != null) {
-                peek = null;
-                --index;
-            }
-            return super.next(length);
         }
 
         public Integer peek() {
@@ -243,6 +236,18 @@ public class SolutionII {
                 peek = next();
             }
             return peek;
+        }
+
+        @Override
+        public Integer next(int length) {
+            if (peek == null) {
+                return super.next(length);
+            }
+            try {
+                return super.next(length - 1);
+            } finally {
+                peek = null;
+            }
         }
     }
 
@@ -254,11 +259,6 @@ public class SolutionII {
         public TwoArrayIterator(PeekableArrayIterator first, PeekableArrayIterator second) {
             this.first = first;
             this.second = second;
-        }
-
-        public TwoArrayIterator(int[] first, int[] second) {
-            this.first = new PeekableArrayIterator(first);
-            this.second = new PeekableArrayIterator(second);
         }
 
         public boolean hasNext() {
@@ -298,16 +298,14 @@ public class SolutionII {
     }
 
     public static void main(String[] args) {
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1}, new int[]{2, 3}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 1}, new int[]{1, 2}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2}, new int[]{1, 2}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2, 2}, new int[]{1, 2, 3}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{100000}, new int[]{100001}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{100000}, new int[]{100000}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{100000}, new int[]{10001, 100000}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2, 3, 7, 8, 11, 23, 47, 1000}, new int[]{1, 2, 3, 4, 10, 12, 18, 100, 200, 300, 400, 100000}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2, 3, 7, 8, 8, 9, 1000}, new int[]{}));
-        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2, 3, 7, 8, 9, 1000}, new int[]{10000, 10000000, 100000000}));
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{2, 3}, new int[]{}) == 2.5);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{}, new int[]{1}) == 1);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1}, new int[]{2, 3}) == 2);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2, 3}, new int[]{}) == 2);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 3}, new int[]{2}) == 2);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}) == 2.5);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{7, 8, 9}, new int[]{1, 2, 3, 4}) == 4);
+        System.out.println(new SolutionII().findMedianSortedArrays(new int[]{0, 0, 0, 0, 0}, new int[]{-1, 0, 0, 0, 0, 0, 1}) == 0);
     }
 
 }
