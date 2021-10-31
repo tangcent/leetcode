@@ -27,3 +27,9 @@ leetcode\.iml
 \.idea/
 
 *.iml
+
+go/temp/
+
+go/.vscode/
+
+go/go.mod
