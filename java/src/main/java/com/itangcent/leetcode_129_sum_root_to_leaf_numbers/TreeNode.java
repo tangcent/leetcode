@@ -1,0 +1,14 @@
+package com.itangcent.leetcode_129_sum_root_to_leaf_numbers;
+
+public class TreeNode {
+     int val;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {}
+     TreeNode(int val) { this.val = val; }
+     TreeNode(int val, TreeNode left, TreeNode right) {
+         this.val = val;
+         this.left = left;
+         this.right = right;
+     }
+}
