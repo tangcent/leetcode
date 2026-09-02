@@ -1,0 +1,31 @@
+{
+    "java": {
+        "test_framework": {
+            "preferred": "none",
+            "avoid": ["junit", "junit4", "junit5", "org.junit", "org.junit.jupiter"]
+        },
+        "test_style": {
+            "preferred": "main_method",
+            "avoid": ["@Test", "@Before", "@After", "@BeforeEach", "@AfterEach"]
+        },
+        "test_output": {
+            "preferred": {
+                "case_result": {
+                    "format": "Test case for {case_name}: {result}",
+                    "result_values": {
+                        "success": "PASSED",
+                        "failure": "FAILED"
+                    }
+                },
+                "failure_details": {
+                    "show_expected": true,
+                    "show_actual": true
+                }
+            }
+        },
+        "test_file": {
+            "preferred": "SolutionTest.java",
+            "avoid": ["Main.java"]
+        }
+    }
+} 

@@ -1,0 +1,27 @@
+# Java Test Generation Rules
+[test_generation]
+language = "java"
+test_file_pattern = "SolutionTest.java"  # Will be created in same directory as Solution.java
+test_method_pattern = "public static void main(String[] args)"
+
+[assertions]
+format = "Test case for {case_name}: {result}"
+success_value = "PASSED"
+failure_value = "FAILED"
+show_expected = true
+show_actual = true
+
+[avoid]
+frameworks = ["junit", "junit4", "junit5", "org.junit", "org.junit.jupiter"]
+annotations = ["@Test", "@Before", "@After", "@BeforeEach", "@AfterEach"]
+file_names = ["Main.java"]
+
+[java_version]
+max_version = "8"
+
+[scope]
+isolated_folders = true  # Only consider files in current problem folder
+
+# Files are co-located in same problem folder
+# e.g. java/src/main/java/com/itangcent/leetcode_xxx_xxxx/
+# contains both Solution.java and SolutionTest.java
